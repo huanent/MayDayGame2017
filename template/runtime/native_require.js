@@ -8,12 +8,14 @@ var game_file_list = [
 	"libs/modules/res/res.js",
 	"libs/modules/tween/tween.js",
 	"polyfill/promise.js",
+	"bin-debug/events/WindowCloseEvent.js",
 	"bin-debug/helpers/AlignHelpers.js",
 	"bin-debug/helpers/RESHelpers.js",
 	"bin-debug/Main.js",
 	"bin-debug/model/Align.js",
 	"bin-debug/model/AlignContainer.js",
 	"bin-debug/ui/LoadingUI.js",
+	"bin-debug/ui/WelcomeUI.js",
 	//----auto game_file_list end----
 ];
 

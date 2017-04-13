@@ -1,23 +1,35 @@
 {
-	"groups":[
-	{
-		"keys":"bg_jpg,egret_icon_png,description_json",
-		"name":"preload"
-	}],
-	"resources":[
-	{
-		"name":"bg_jpg",
-		"type":"image",
-		"url":"assets/bg.jpg"
-	},
-	{
-		"name":"egret_icon_png",
-		"type":"image",
-		"url":"assets/egret_icon.png"
-	},
-	{
-		"name":"description_json",
-		"type":"json",
-		"url":"config/description.json"
-	}]
+	"groups": [
+		{
+			"keys": "description_json,bg_png,begin_btn_png,card_btn_png,begin_title_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/bg.png",
+			"type": "image",
+			"name": "bg_png"
+		},
+		{
+			"url": "assets/begin_title.png",
+			"type": "image",
+			"name": "begin_title_png"
+		},
+		{
+			"url": "assets/begin_btn.png",
+			"type": "image",
+			"name": "begin_btn_png"
+		},
+		{
+			"url": "assets/card_btn.png",
+			"type": "image",
+			"name": "card_btn_png"
+		}
+	]
 }

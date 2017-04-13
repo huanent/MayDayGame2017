@@ -115,8 +115,13 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene() {
-        let txt= RESHelpers.createTxt("你好");
-        AlignHelpers.addToParent(this,txt,Align.center,AlignContainer.stage);
+        AlignHelpers.stageWidth = this.stage.stageWidth;
+        AlignHelpers.stageHeight = this.stage.stageHeight;
+        let welcomeUI = new WelcomeUI();
+        this.addChild(welcomeUI);
+        welcomeUI.addEventListener(WindowCloseEvent.NAME, () => {
+            super.removeChild(welcomeUI);
+        }, this)
     }
 }
 
