@@ -1,5 +1,6 @@
 class RESHelpers {
 
+
     static createImg(name: string, width: number = null, height: number = null): egret.Bitmap {
         let img = new egret.Bitmap(RES.getRes(name));
 
@@ -19,6 +20,14 @@ class RESHelpers {
         txt.text = content;
 
         return txt;
+    }
+
+    static createShape(x: number, y: number, width: number, height: number, color: number, alpha: number): egret.Shape {
+        let shape = new egret.Shape();
+        shape.graphics.beginFill(color, alpha);
+        shape.graphics.drawRect(x, y, width, height);
+        shape.graphics.endFill();
+        return shape;
     }
 
     static addToParent(
@@ -63,5 +72,6 @@ class RESHelpers {
         if (call) call(obj);
         obj.visible = true;
     }
+
 
 }
