@@ -1,0 +1,4 @@
+enum AlignContainer {
+	parent,
+	stage
+}

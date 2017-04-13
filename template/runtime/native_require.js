@@ -8,8 +8,12 @@ var game_file_list = [
 	"libs/modules/res/res.js",
 	"libs/modules/tween/tween.js",
 	"polyfill/promise.js",
-	"bin-debug/LoadingUI.js",
+	"bin-debug/helpers/AlignHelpers.js",
+	"bin-debug/helpers/RESHelpers.js",
 	"bin-debug/Main.js",
+	"bin-debug/model/Align.js",
+	"bin-debug/model/AlignContainer.js",
+	"bin-debug/ui/LoadingUI.js",
 	//----auto game_file_list end----
 ];
 
@@ -44,7 +48,7 @@ egret_native.egretStart = function () {
         //----auto option start----
 		entryClassName: "Main",
 		frameRate: 30,
-		scaleMode: "showAll",
+		scaleMode: "fixedWidth",
 		contentWidth: 720,
 		contentHeight: 1155,
 		showPaintRect: false,
