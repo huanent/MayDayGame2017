@@ -8,6 +8,8 @@ class Main extends egret.DisplayObjectContainer {
     private loadingView: LoadingUI;
     private welcomeUI: WelcomeUI;
     private gameUI: GameUI;
+    private gameOverUI: GameOverUI;
+    private isFirst: boolean = true;
 
     public constructor() {
         super();
@@ -94,16 +96,37 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {
         AlignHelpers.stageWidth = this.stage.stageWidth;
         AlignHelpers.stageHeight = this.stage.stageHeight;
+        this.addWelcomeUI();
+    }
 
+    private addWelcomeUI(): void {
         let welcomeUI = this.welcomeUI = new WelcomeUI();
-        let gameUI;
-
         this.addChild(welcomeUI);
-        RES.loadGroup("game");
+        if (this.isFirst) {
+            RES.loadGroup("game");
+            this.isFirst = false;
+        } else {
+            this.welcomeUI.enableBeginGameTap();
+        }
         welcomeUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(welcomeUI);
-            let gameUI = this.gameUI = new GameUI();
-            super.addChild(gameUI)
+            this.addGameUI();
+        }, this)
+    }
+
+    private addGameUI(): void {
+        this.gameUI = new GameUI();
+        super.addChild(this.gameUI)
+        this.gameUI.addEventListener(GameOverEvent.NAME, this.onGameOver, this)
+    }
+
+    private onGameOver(e: GameOverEvent): void {
+        super.removeChild(this.gameUI);
+        this.gameOverUI = new GameOverUI();
+        super.addChild(this.gameOverUI);
+        this.gameOverUI.addEventListener(WindowCloseEvent.NAME, () => {
+            super.removeChild(this.gameOverUI);
+            this.addWelcomeUI();
         }, this)
     }
 }

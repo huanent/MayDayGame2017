@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "game_bg_png,monk_png,enemy_png",
+			"keys": "game_bg_png,monk_png,enemy_png,restart_btn_png",
 			"name": "game"
 		}
 	],
@@ -49,6 +49,11 @@
 			"url": "assets/enemy.png",
 			"type": "image",
 			"name": "enemy_png"
+		},
+		{
+			"url": "assets/restart_btn.png",
+			"type": "image",
+			"name": "restart_btn_png"
 		}
 	]
 }
