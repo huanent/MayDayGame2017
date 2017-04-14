@@ -5,6 +5,8 @@ class GameUI extends egret.Sprite {
 	passTime: number = 0;//游戏时间
 	enemys: Array<EnemyUI> = new Array<EnemyUI>();
 	haveAddEnemyTask: boolean;
+	gameIsOver: boolean;
+	timers: Array<egret.Timer> = new Array<egret.Timer>();
 	public constructor() {
 		super();
 		this.createView();
@@ -29,13 +31,15 @@ class GameUI extends egret.Sprite {
 			monk.y -= 100;
 		})
 		bg.touchEnabled = true;
-		bg.addEventListener(egret.TouchEvent.TOUCH_MOVE, (e: egret.TouchEvent) => {
-			egret.Tween.get(monk).to({ x: e.stageX - monk.width / 2, y: e.stageY - monk.height / 2 }, 100)
-		}, this);
-		bg.addEventListener(egret.TouchEvent.TOUCH_TAP, (e: egret.TouchEvent) => {
+		let moveMonk: Function = (e: egret.TouchEvent) => {
+			let x = e.stageX - monk.x - monk.width / 2;
+			let y = e.stageY - monk.y - - monk.height / 2;
+			let length = Math.sqrt(x * x + y * y);
 			egret.Tween.get(monk)
-				.to({ x: e.stageX - monk.width / 2, y: e.stageY - monk.height / 2 }, 100)
-		}, this);
+				.to({ x: e.stageX - monk.width / 2, y: e.stageY - monk.height / 2 }, length / 3)
+		}
+		bg.addEventListener(egret.TouchEvent.TOUCH_MOVE, moveMonk, this);
+		bg.addEventListener(egret.TouchEvent.TOUCH_TAP, moveMonk, this);
 	}
 
 	private addBar(): void {
@@ -46,6 +50,7 @@ class GameUI extends egret.Sprite {
 			this.passTime += 0.1;
 			barUI.setTime(this.passTime);
 		}, this)
+		this.timers.push(timer);
 		timer.start();
 	}
 
@@ -61,14 +66,14 @@ class GameUI extends egret.Sprite {
 		enemy.y = Helpers.getRandomNum(0, AlignHelpers.stageHeight - enemy.height);
 		enemy.visible = true;
 		this.addChild(enemy);
-		//if (!this.enemys) this.enemys = new Array<EnemyUI>();
 		this.enemys.push(enemy);
+		this.enemyHit(enemy);
 	}
 
 	private addEnemyAction(): void {
 		let timer = new egret.Timer(20, 0);
 		let toLength = AlignHelpers.stageHeight + AlignHelpers.stageWidth;
-		let speed = 3;
+		let speed = 4;
 		timer.addEventListener(egret.TimerEvent.TIMER, () => {
 			this.enemys.forEach(element => {
 				let x = this.monk.x - element.x;
@@ -81,7 +86,7 @@ class GameUI extends egret.Sprite {
 					if (this.monk.y < element.y) toY = -toY;
 					egret.Tween
 						.get(element)
-						.to({ x: element.x + toX, y: element.y + toY }, 2500)
+						.to({ x: element.x + toX, y: element.y + toY }, 2000)
 						.call(() => {
 							super.removeChild(element);
 						})
@@ -97,15 +102,20 @@ class GameUI extends egret.Sprite {
 
 			});
 		}, this)
+		this.timers.push(timer);
 		timer.start();
 	}
+
 	private addEnemyTimer(): void {
 		let timer = new egret.Timer(100, 0);
 		timer.addEventListener(egret.TimerEvent.TIMER, () => {
 			if (!this.haveAddEnemyTask && this.enemys.length == 0) {
 				this.haveAddEnemyTask = true;
 				egret.Tween.get(timer).wait(2500).call(() => {
-					let enemyNum = Helpers.getRandomNum(2, 3);
+					let enemyNum = 0;
+					if (this.passTime < 25) enemyNum = Helpers.getRandomNum(2, 3);
+					else if (this.passTime >= 25 && this.passTime < 50) enemyNum = Helpers.getRandomNum(3, 4);
+					else if (this.passTime > 50) enemyNum = Helpers.getRandomNum(4, 5);
 					for (let i = 0; i < enemyNum; i++) {
 						this.addEnemy();
 					}
@@ -113,6 +123,24 @@ class GameUI extends egret.Sprite {
 				})
 			}
 		}, this)
+		this.timers.push(timer);
+		timer.start();
+	}
+
+	private enemyHit(enemy: EnemyUI): void {
+		let timer = new egret.Timer(10, 0);
+		timer.addEventListener(egret.TimerEvent.TIMER, () => {
+			let monk = this.monk;
+			let isHit = enemy.hitTestPoint(monk.x + monk.width / 2, monk.y + monk.height / 2);
+			if (isHit && !this.gameIsOver) {
+				this.gameIsOver = true;
+				this.timers.forEach(element => {
+					element.stop();
+				});
+				alert("gameover")
+			}
+		}, this)
+		this.timers.push(timer)
 		timer.start();
 	}
 }
