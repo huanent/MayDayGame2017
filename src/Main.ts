@@ -6,6 +6,8 @@ class Main extends egret.DisplayObjectContainer {
      * Process interface loading
      */
     private loadingView: LoadingUI;
+    private welcomeUI: WelcomeUI;
+    private gameUI: GameUI;
 
     public constructor() {
         super();
@@ -44,11 +46,14 @@ class Main extends egret.DisplayObjectContainer {
     private onResourceLoadComplete(event: RES.ResourceEvent) {
         if (event.groupName == "preload") {
             this.stage.removeChild(this.loadingView);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+            // RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
             RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
             this.createGameScene();
+        }
+        if (event.groupName == "game") {
+            this.welcomeUI.enableBeginGameTap();
         }
     }
 
@@ -89,10 +94,16 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {
         AlignHelpers.stageWidth = this.stage.stageWidth;
         AlignHelpers.stageHeight = this.stage.stageHeight;
-        let welcomeUI = new WelcomeUI();
+
+        let welcomeUI = this.welcomeUI = new WelcomeUI();
+        let gameUI;
+
         this.addChild(welcomeUI);
+        RES.loadGroup("game");
         welcomeUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(welcomeUI);
+            let gameUI = this.gameUI = new GameUI();
+            super.addChild(gameUI)
         }, this)
     }
 }

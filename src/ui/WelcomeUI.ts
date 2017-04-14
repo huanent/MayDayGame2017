@@ -1,4 +1,5 @@
 class WelcomeUI extends egret.Sprite {
+	beginBtn: egret.Bitmap;
 	/**
 	 *欢迎界面
 	 */
@@ -8,6 +9,7 @@ class WelcomeUI extends egret.Sprite {
 	}
 
 	private createView(): void {
+		let beginBtn = this.beginBtn= RESHelpers.createImg("begin_btn_png");
 
 		let bg = RESHelpers.createImg("bg_png", AlignHelpers.stageWidth);
 		RESHelpers.addToParent(this, bg);
@@ -18,24 +20,25 @@ class WelcomeUI extends egret.Sprite {
 			egret.Tween.get(title).to({ y: title.y + 400 }, 1000, egret.Ease.circOut);
 		});
 
-		let beginBtn = RESHelpers.createImg("begin_btn_png");
 		RESHelpers.addToParent(this, beginBtn, Align.centerX, null, () => {
 			beginBtn.y = AlignHelpers.stageHeight + beginBtn.height;
 			egret.Tween.get(beginBtn)
-			.to({ y: beginBtn.y - 500 }, 1000, egret.Ease.circOut)
-			.call(()=>{
-				beginBtn.touchEnabled=true;
-				beginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
-					this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME))
-				},this)
-			});
+				.to({ y: beginBtn.y - 500 }, 1000, egret.Ease.circOut)
 		})
 
 		let cardBtn = RESHelpers.createImg("card_btn_png");
 		RESHelpers.addToParent(this, cardBtn, Align.centerX, null, () => {
 			cardBtn.y = AlignHelpers.stageHeight + cardBtn.height;
 			egret.Tween.get(cardBtn)
-			.to({ y: cardBtn.y - 350 }, 1000, egret.Ease.circOut);
+				.to({ y: cardBtn.y - 350 }, 1000, egret.Ease.circOut);
 		})
+	}
+
+	enableBeginGameTap(): void {
+		let beginBtn = this.beginBtn;
+		beginBtn.touchEnabled = true;
+		beginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME))
+		}, this)
 	}
 }

@@ -3,6 +3,10 @@
 		{
 			"keys": "description_json,bg_png,begin_btn_png,card_btn_png,begin_title_png",
 			"name": "preload"
+		},
+		{
+			"keys": "game_bg_png,monk_png,enemy_png",
+			"name": "game"
 		}
 	],
 	"resources": [
@@ -30,6 +34,21 @@
 			"url": "assets/card_btn.png",
 			"type": "image",
 			"name": "card_btn_png"
+		},
+		{
+			"url": "assets/game_bg.png",
+			"type": "image",
+			"name": "game_bg_png"
+		},
+		{
+			"url": "assets/monk.png",
+			"type": "image",
+			"name": "monk_png"
+		},
+		{
+			"url": "assets/enemy.png",
+			"type": "image",
+			"name": "enemy_png"
 		}
 	]
 }
