@@ -1,5 +1,7 @@
 class GameUI extends egret.Sprite {
-	bg: egret.Bitmap;
+	bg: egret.Shape;
+	bg1: egret.Bitmap;
+	bg2: egret.Bitmap;
 	monk: MonkUI;
 	barUI: BarUI;
 	passTime: number = 0;//游戏时间
@@ -20,13 +22,29 @@ class GameUI extends egret.Sprite {
 	}
 
 	private addBg(): void {
-		let bg = this.bg = RESHelpers.createImg("game_bg_png", AlignHelpers.stageWidth, AlignHelpers.stageHeight);
-		RESHelpers.addToParent(this, bg);
+		let bg = this.bg = RESHelpers.createShape(0, 0, AlignHelpers.stageWidth, AlignHelpers.stageHeight, 0, 0);
+		super.addChild(bg);
+		let bg1 = this.bg1 = RESHelpers.createImg("game_bg_png", AlignHelpers.stageWidth);
+		let bg2 = this.bg2 = RESHelpers.createImg("game_bg_png", AlignHelpers.stageWidth);
+		RESHelpers.addToParent(this, bg1);
+		super.swapChildren(bg, bg1);
+		bg2.y = 1155;
+		RESHelpers.addToParent(this, bg2);
+		super.swapChildren(bg, bg2);
+		let bgTimer = new egret.Timer(30, 0);
+		bgTimer.addEventListener(egret.TimerEvent.TIMER, () => {
+			if (bg2.y >= 1155) bg2.y = -1155;
+			if (bg1.y >= 1155) bg1.y = -1155;
+			bg1.y += 1;
+			bg2.y += 1;
+		}, this)
+		bgTimer.start();
+
 	}
 
 	private addMonk(): void {
 		let monk = this.monk = new MonkUI();
-		let bg = this.bg
+		let bg = this.bg;
 		RESHelpers.addToParent(this, monk, Align.bottomCenter, null, () => {
 			monk.y -= 100;
 		})
@@ -40,6 +58,18 @@ class GameUI extends egret.Sprite {
 		}
 		bg.addEventListener(egret.TouchEvent.TOUCH_MOVE, moveMonk, this);
 		bg.addEventListener(egret.TouchEvent.TOUCH_TAP, moveMonk, this);
+		let cloudTimer = new egret.Timer(2000, 0);
+		cloudTimer.addEventListener(egret.TimerEvent.TIMER, () => {
+			let cloud = RESHelpers.createImg("yun-small_png", AlignHelpers.stageWidth);
+			cloud.y -= cloud.height;
+			super.addChild(cloud);
+			cloud.visible = true;
+			super.setChildIndex(cloud, this.getChildIndex(monk) - 1)
+			egret.Tween.get(cloud).to({ y: 2000 }, 10000).call(() => {
+				super.removeChild(cloud);
+			});
+		}, this)
+		cloudTimer.start();
 	}
 
 	private addBar(): void {
@@ -79,14 +109,17 @@ class GameUI extends egret.Sprite {
 				let x = this.monk.x - element.x;
 				let y = this.monk.y - element.y;
 				let s = Math.sqrt(x * x + y * y);
-				if (s < 350) {
+				if (s < 300) {
 					let toX = toLength / (1 + Math.abs(y / x));
 					if (this.monk.x < element.x) toX = -toX;
 					let toY = toLength / (1 + Math.abs(x / y));
 					if (this.monk.y < element.y) toY = -toY;
 					egret.Tween
 						.get(element)
-						.to({ x: element.x + toX, y: element.y + toY }, 2000)
+						.call(() => {
+							element.slip(x, y);
+						})
+						.to({ x: element.x + toX, y: element.y + toY }, 2500)
 						.call(() => {
 							super.removeChild(element);
 						})

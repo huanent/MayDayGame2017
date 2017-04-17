@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "game_bg_png,monk_png,enemy_png,restart_btn_png",
+			"keys": "game_bg_png,monk_png,enemy_png,restart_btn_png,monk2_png,enemy2_png,yun-small_png,music-_close-@2x_png,music-@2x_png",
 			"name": "game"
 		}
 	],
@@ -54,6 +54,31 @@
 			"url": "assets/restart_btn.png",
 			"type": "image",
 			"name": "restart_btn_png"
+		},
+		{
+			"url": "assets/monk2.png",
+			"type": "image",
+			"name": "monk2_png"
+		},
+		{
+			"url": "assets/enemy2.png",
+			"type": "image",
+			"name": "enemy2_png"
+		},
+		{
+			"url": "assets/yun-small.png",
+			"type": "image",
+			"name": "yun-small_png"
+		},
+		{
+			"url": "assets/music-@2x.png",
+			"type": "image",
+			"name": "music-@2x_png"
+		},
+		{
+			"url": "assets/music-_close-@2x.png",
+			"type": "image",
+			"name": "music-_close-@2x_png"
 		}
 	]
 }
