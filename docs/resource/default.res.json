@@ -1,11 +1,19 @@
 {
 	"groups": [
 		{
+<<<<<<< HEAD
 			"keys": "description_json,bg_png,card_btn_png,begin_btn_png,home-jinnang@2x_png,rules_bg@2x_png,game_bg_png,monk_png,monk2_png,enemy_png,enemy2_png,bg_mp3,music-_close-@2x_png,music-@2x_png,yun-small_png",
 			"name": "preload"
 		},
 		{
 			"keys": "restart_btn_png",
+=======
+			"keys": "description_json,bg_png,card_btn_png,begin_btn_png,home-jinnang@2x_png,rules_bg@2x_png",
+			"name": "preload"
+		},
+		{
+			"keys": "game_bg_png,monk_png,enemy_png,monk2_png,enemy2_png,yun-small_png,music-_close-@2x_png,music-@2x_png,bg_mp3,restart_btn_png",
+>>>>>>> f0e824ac2d3e964764a1bdc9d3398d2b56b2fc23
 			"name": "game"
 		}
 	],
@@ -86,9 +94,15 @@
 			"name": "restart_btn_png"
 		},
 		{
+<<<<<<< HEAD
 			"url": "assets/rules_bg@2x.png",
 			"type": "image",
 			"name": "rules_bg@2x_png"
+=======
+			"name": "rules_bg@2x_png",
+			"type": "image",
+			"url": "assets/rules_bg@2x.png"
+>>>>>>> f0e824ac2d3e964764a1bdc9d3398d2b56b2fc23
 		}
 	]
 }
