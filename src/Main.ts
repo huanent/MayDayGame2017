@@ -49,13 +49,11 @@ class Main extends egret.DisplayObjectContainer {
     private onResourceLoadComplete(event: RES.ResourceEvent) {
         if (event.groupName == "preload") {
             this.stage.removeChild(this.loadingView);
-            // RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
             RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
             this.createGameScene();
-        }
-        if (event.groupName == "game") {
             this.welcomeUI.enableBeginGameTap();
         }
     }

@@ -1,5 +1,6 @@
 class WelcomeUI extends egret.Sprite {
 	beginBtn: egret.Bitmap;
+	cardBtn: egret.Bitmap;
 	helpBtnTimer: egret.Timer;
 	/**
 	 *欢迎界面
@@ -38,7 +39,7 @@ class WelcomeUI extends egret.Sprite {
 			this.helpBtnTimer.start();
 		})
 
-		let cardBtn = RESHelpers.createImg("card_btn_png");
+		let cardBtn = this.cardBtn = RESHelpers.createImg("card_btn_png");
 		RESHelpers.addToParent(this, cardBtn, Align.centerX, null, () => {
 			cardBtn.y = AlignHelpers.stageHeight + cardBtn.height;
 			egret.Tween.get(cardBtn)
@@ -62,8 +63,14 @@ class WelcomeUI extends egret.Sprite {
 		let beginBtn = this.beginBtn;
 		beginBtn.touchEnabled = true;
 		beginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			this.helpBtnTimer.stop();
-			this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME))
+			egret.Tween.get(this.beginBtn)
+				.to({ y: this.beginBtn.y + 420 }, 500, egret.Ease.circIn)
+			egret.Tween.get(this.cardBtn)
+				.to({ y: this.cardBtn.y + 300 }, 1000, egret.Ease.cubicOut)
+				.call(() => {
+					this.helpBtnTimer.stop();
+					this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME))
+				})
 		}, this)
 	}
 }
