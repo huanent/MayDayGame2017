@@ -14,7 +14,6 @@ class BarUI extends egret.Sprite {
 		let closeMusicBtn = RESHelpers.createImg("music-_close-@2x_png");
 		RESHelpers.addToParent(this, closeMusicBtn, Align.right, null, () => {
 			closeMusicBtn.y += 75;
-			closeMusicBtn.x -= 75;
 			closeMusicBtn.anchorOffsetX = closeMusicBtn.width / 2;
 			closeMusicBtn.anchorOffsetY = closeMusicBtn.height / 2;
 			closeMusicBtn.touchEnabled=true;
@@ -23,7 +22,6 @@ class BarUI extends egret.Sprite {
 		let openMusicBtn = RESHelpers.createImg("music-@2x_png");
 		RESHelpers.addToParent(this, openMusicBtn, Align.right, null, () => {
 			openMusicBtn.y += 75;
-			openMusicBtn.x -= 75;
 			openMusicBtn.anchorOffsetX = openMusicBtn.width / 2;
 			openMusicBtn.anchorOffsetY = openMusicBtn.height / 2;
 			openMusicBtn.touchEnabled=true;

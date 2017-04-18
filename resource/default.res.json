@@ -1,11 +1,11 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,bg_png,begin_btn_png,card_btn_png,begin_title_png",
+			"keys": "description_json,bg_png,card_btn_png,begin_btn_png,home-jinnang@2x_png,rules_bg@2x_png",
 			"name": "preload"
 		},
 		{
-			"keys": "game_bg_png,monk_png,enemy_png,restart_btn_png,monk2_png,enemy2_png,yun-small_png,music-_close-@2x_png,music-@2x_png,bg_mp3",
+			"keys": "game_bg_png,monk_png,enemy_png,monk2_png,enemy2_png,yun-small_png,music-_close-@2x_png,music-@2x_png,bg_mp3,restart_btn_png",
 			"name": "game"
 		}
 	],
@@ -19,16 +19,6 @@
 			"url": "assets/bg.png",
 			"type": "image",
 			"name": "bg_png"
-		},
-		{
-			"url": "assets/begin_title.png",
-			"type": "image",
-			"name": "begin_title_png"
-		},
-		{
-			"url": "assets/begin_btn.png",
-			"type": "image",
-			"name": "begin_btn_png"
 		},
 		{
 			"url": "assets/card_btn.png",
@@ -49,11 +39,6 @@
 			"url": "assets/enemy.png",
 			"type": "image",
 			"name": "enemy_png"
-		},
-		{
-			"url": "assets/restart_btn.png",
-			"type": "image",
-			"name": "restart_btn_png"
 		},
 		{
 			"url": "assets/monk2.png",
@@ -84,6 +69,26 @@
 			"url": "assets/bg.mp3",
 			"type": "sound",
 			"name": "bg_mp3"
+		},
+		{
+			"url": "assets/begin_btn.png",
+			"type": "image",
+			"name": "begin_btn_png"
+		},
+		{
+			"url": "assets/home-jinnang@2x.png",
+			"type": "image",
+			"name": "home-jinnang@2x_png"
+		},
+		{
+			"url": "assets/restart_btn.png",
+			"type": "image",
+			"name": "restart_btn_png"
+		},
+		{
+			"name": "rules_bg@2x_png",
+			"type": "image",
+			"url": "assets/rules_bg@2x.png"
 		}
 	]
 }

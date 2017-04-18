@@ -203,6 +203,7 @@ class GameUI extends egret.Sprite {
 				let event = new GameOverEvent(GameOverEvent.NAME);
 				event.time = this.passTime;
 				this.dispatchEvent(event);
+				this.monk.visible=false;
 			}
 		}, this)
 		this.timers.push(timer)

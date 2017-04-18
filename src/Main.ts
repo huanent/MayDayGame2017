@@ -123,10 +123,10 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private onGameOver(e: GameOverEvent): void {
-        super.removeChild(this.gameUI);
         this.gameOverUI = new GameOverUI();
         super.addChild(this.gameOverUI);
         this.gameOverUI.addEventListener(WindowCloseEvent.NAME, () => {
+            super.removeChild(this.gameUI);
             super.removeChild(this.gameOverUI);
             this.addWelcomeUI();
         }, this)
