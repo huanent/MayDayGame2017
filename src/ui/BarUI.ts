@@ -1,6 +1,6 @@
 class BarUI extends egret.Sprite {
 	timeTxt: egret.TextField;
-	public constructor() {
+	public constructor(public music: MusicPlayer) {
 		super();
 		this.createView();
 	}
@@ -10,23 +10,44 @@ class BarUI extends egret.Sprite {
 		RESHelpers.addToParent(this, timeTxt, Align.centerX, AlignContainer.stage, () => {
 			timeTxt.y += 50;
 		});
+
 		let closeMusicBtn = RESHelpers.createImg("music-_close-@2x_png");
 		RESHelpers.addToParent(this, closeMusicBtn, Align.right, null, () => {
 			closeMusicBtn.y += 75;
 			closeMusicBtn.x -= 75;
 			closeMusicBtn.anchorOffsetX = closeMusicBtn.width / 2;
 			closeMusicBtn.anchorOffsetY = closeMusicBtn.height / 2;
-			closeMusicBtn.touchEnabled = true;
+			closeMusicBtn.touchEnabled=true;
 		})
-		closeMusicBtn.visible = false;
+
 		let openMusicBtn = RESHelpers.createImg("music-@2x_png");
 		RESHelpers.addToParent(this, openMusicBtn, Align.right, null, () => {
 			openMusicBtn.y += 75;
 			openMusicBtn.x -= 75;
 			openMusicBtn.anchorOffsetX = openMusicBtn.width / 2;
 			openMusicBtn.anchorOffsetY = openMusicBtn.height / 2;
-			openMusicBtn.touchEnabled = true;
+			openMusicBtn.touchEnabled=true;
 		})
+
+		closeMusicBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			this.music.play();
+			closeMusicBtn.visible = false;
+			openMusicBtn.visible = true;
+		}, this)
+		openMusicBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			this.music.stop();
+			openMusicBtn.visible = false;
+			closeMusicBtn.visible = true;
+		}, this)
+		if (this.music.isFirst) {
+			this.music.isFirst = false;
+			closeMusicBtn.visible = false;
+		} else {
+			if (this.music.isplay) closeMusicBtn.visible = false;
+			else openMusicBtn.visible = false;
+		}
+
+
 		let openMusicBtnTimer = new egret.Timer(30, 0);
 		openMusicBtnTimer.addEventListener(egret.TimerEvent.TIMER, () => {
 			openMusicBtn.rotation = ++openMusicBtn.rotation % 360;

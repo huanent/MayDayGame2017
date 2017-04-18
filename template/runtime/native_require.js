@@ -23,6 +23,7 @@ var game_file_list = [
 	"bin-debug/ui/GameUI.js",
 	"bin-debug/ui/LoadingUI.js",
 	"bin-debug/ui/MonkUI.js",
+	"bin-debug/ui/MusicPlayer.js",
 	"bin-debug/ui/WelcomeUI.js",
 	//----auto game_file_list end----
 ];

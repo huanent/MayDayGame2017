@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "game_bg_png,monk_png,enemy_png,restart_btn_png,monk2_png,enemy2_png,yun-small_png,music-_close-@2x_png,music-@2x_png",
+			"keys": "game_bg_png,monk_png,enemy_png,restart_btn_png,monk2_png,enemy2_png,yun-small_png,music-_close-@2x_png,music-@2x_png,bg_mp3",
 			"name": "game"
 		}
 	],
@@ -79,6 +79,11 @@
 			"url": "assets/music-_close-@2x.png",
 			"type": "image",
 			"name": "music-_close-@2x_png"
+		},
+		{
+			"url": "assets/bg.mp3",
+			"type": "sound",
+			"name": "bg_mp3"
 		}
 	]
 }

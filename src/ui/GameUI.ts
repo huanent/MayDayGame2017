@@ -9,13 +9,14 @@ class GameUI extends egret.Sprite {
 	haveAddEnemyTask: boolean;
 	gameIsOver: boolean;
 	timers: Array<egret.Timer> = new Array<egret.Timer>();
-	public constructor() {
+	public constructor(public music: MusicPlayer) {
 		super();
 		this.createView();
 	}
 	private createView(): void {
 		this.addBg();
 		this.addMonk();
+		this.addCloud();
 		this.addBar();
 		this.addEnemyTimer();
 		this.addEnemyAction();
@@ -58,13 +59,42 @@ class GameUI extends egret.Sprite {
 		}
 		bg.addEventListener(egret.TouchEvent.TOUCH_MOVE, moveMonk, this);
 		bg.addEventListener(egret.TouchEvent.TOUCH_TAP, moveMonk, this);
+
+	}
+
+	private addCloud(): void {
+		let cloud1 = RESHelpers.createImg("yun-small_png", AlignHelpers.stageWidth);
+		cloud1.y = -230;
+		super.addChild(cloud1);
+		cloud1.visible = true;
+		super.setChildIndex(cloud1, this.getChildIndex(this.monk) - 1)
+		egret.Tween.get(cloud1).to({ y: 2000 }, 10000).call(() => {
+			super.removeChild(cloud1);
+		});
+		let cloud2 = RESHelpers.createImg("yun-small_png", AlignHelpers.stageWidth);
+		cloud2.y = 236;
+		super.addChild(cloud2);
+		cloud2.visible = true;
+		super.setChildIndex(cloud2, this.getChildIndex(this.monk) - 1)
+		egret.Tween.get(cloud2).to({ y: 2466 }, 10000).call(() => {
+			super.removeChild(cloud2);
+		});
+		let cloud3 = RESHelpers.createImg("yun-small_png", AlignHelpers.stageWidth);
+		cloud3.y = 676;
+		super.addChild(cloud3);
+		cloud3.visible = true;
+		super.setChildIndex(cloud3, this.getChildIndex(this.monk) - 1)
+		egret.Tween.get(cloud3).to({ y: 2906 }, 10000).call(() => {
+			super.removeChild(cloud3);
+		});
+
 		let cloudTimer = new egret.Timer(2000, 0);
 		cloudTimer.addEventListener(egret.TimerEvent.TIMER, () => {
 			let cloud = RESHelpers.createImg("yun-small_png", AlignHelpers.stageWidth);
 			cloud.y -= cloud.height;
 			super.addChild(cloud);
 			cloud.visible = true;
-			super.setChildIndex(cloud, this.getChildIndex(monk) - 1)
+			super.setChildIndex(cloud, this.getChildIndex(this.monk) - 1)
 			egret.Tween.get(cloud).to({ y: 2000 }, 10000).call(() => {
 				super.removeChild(cloud);
 			});
@@ -73,7 +103,7 @@ class GameUI extends egret.Sprite {
 	}
 
 	private addBar(): void {
-		let barUI = this.barUI = new BarUI();
+		let barUI = this.barUI = new BarUI(this.music);
 		RESHelpers.addToParent(this, barUI);
 		let timer = new egret.Timer(100, 0);
 		timer.addEventListener(egret.TimerEvent.TIMER, () => {

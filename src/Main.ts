@@ -10,6 +10,7 @@ class Main extends egret.DisplayObjectContainer {
     private gameUI: GameUI;
     private gameOverUI: GameOverUI;
     private isFirst: boolean = true;
+    private music: MusicPlayer;
 
     public constructor() {
         super();
@@ -110,12 +111,13 @@ class Main extends egret.DisplayObjectContainer {
         }
         welcomeUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(welcomeUI);
+            if (!this.music) this.music = new MusicPlayer();
             this.addGameUI();
         }, this)
     }
 
     private addGameUI(): void {
-        this.gameUI = new GameUI();
+        this.gameUI = new GameUI(this.music);
         super.addChild(this.gameUI)
         this.gameUI.addEventListener(GameOverEvent.NAME, this.onGameOver, this)
     }
