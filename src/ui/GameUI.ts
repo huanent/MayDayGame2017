@@ -68,7 +68,7 @@ class GameUI extends egret.Sprite {
 		super.addChild(cloud1);
 		cloud1.visible = true;
 		super.setChildIndex(cloud1, this.getChildIndex(this.monk) - 1)
-		egret.Tween.get(cloud1).to({ y: 2000 }, 10000).call(() => {
+		egret.Tween.get(cloud1).to({ y: 2000 }, 13000).call(() => {
 			super.removeChild(cloud1);
 		});
 		let cloud2 = RESHelpers.createImg("yun-small_png", AlignHelpers.stageWidth);
@@ -76,7 +76,7 @@ class GameUI extends egret.Sprite {
 		super.addChild(cloud2);
 		cloud2.visible = true;
 		super.setChildIndex(cloud2, this.getChildIndex(this.monk) - 1)
-		egret.Tween.get(cloud2).to({ y: 2466 }, 10000).call(() => {
+		egret.Tween.get(cloud2).to({ y: 2466 }, 13000).call(() => {
 			super.removeChild(cloud2);
 		});
 		let cloud3 = RESHelpers.createImg("yun-small_png", AlignHelpers.stageWidth);
@@ -84,7 +84,7 @@ class GameUI extends egret.Sprite {
 		super.addChild(cloud3);
 		cloud3.visible = true;
 		super.setChildIndex(cloud3, this.getChildIndex(this.monk) - 1)
-		egret.Tween.get(cloud3).to({ y: 2906 }, 10000).call(() => {
+		egret.Tween.get(cloud3).to({ y: 2906 }, 13000).call(() => {
 			super.removeChild(cloud3);
 		});
 
@@ -95,7 +95,7 @@ class GameUI extends egret.Sprite {
 			super.addChild(cloud);
 			cloud.visible = true;
 			super.setChildIndex(cloud, this.getChildIndex(this.monk) - 1)
-			egret.Tween.get(cloud).to({ y: 2000 }, 10000).call(() => {
+			egret.Tween.get(cloud).to({ y: 2000 }, 13000).call(() => {
 				super.removeChild(cloud);
 			});
 		}, this)
