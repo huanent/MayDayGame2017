@@ -95,11 +95,12 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {
         AlignHelpers.stageWidth = this.stage.stageWidth;
         AlignHelpers.stageHeight = this.stage.stageHeight;
+        if (!this.music) this.music = new MusicPlayer();
         this.addWelcomeUI();
     }
 
     private addWelcomeUI(): void {
-        let welcomeUI = this.welcomeUI = new WelcomeUI();
+        let welcomeUI = this.welcomeUI = new WelcomeUI(this.music);
         this.addChild(welcomeUI);
         if (this.isFirst) {
             RES.loadGroup("game");
@@ -109,7 +110,6 @@ class Main extends egret.DisplayObjectContainer {
         }
         welcomeUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(welcomeUI);
-            if (!this.music) this.music = new MusicPlayer();
             this.addGameUI();
         }, this)
     }

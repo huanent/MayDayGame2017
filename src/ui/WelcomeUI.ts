@@ -5,7 +5,7 @@ class WelcomeUI extends egret.Sprite {
 	/**
 	 *欢迎界面
 	 */
-	constructor() {
+	constructor(public music: MusicPlayer) {
 		super();
 		this.createView();
 	}
@@ -71,6 +71,7 @@ class WelcomeUI extends egret.Sprite {
 					this.helpBtnTimer.stop();
 					this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME))
 				})
+			if (this.music.isFirst) this.music.play();
 		}, this)
 	}
 }
