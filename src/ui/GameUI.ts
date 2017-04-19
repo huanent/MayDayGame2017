@@ -139,7 +139,7 @@ class GameUI extends egret.Sprite {
 				let x = this.monk.x - element.x;
 				let y = this.monk.y - element.y;
 				let s = Math.sqrt(x * x + y * y);
-				if (s < 300) {
+				if (s < 350) {
 					let toX = toLength / (1 + Math.abs(y / x));
 					if (this.monk.x < element.x) toX = -toX;
 					let toY = toLength / (1 + Math.abs(x / y));
