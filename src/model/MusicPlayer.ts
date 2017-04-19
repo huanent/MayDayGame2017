@@ -6,7 +6,7 @@ class MusicPlayer {
 	isplay: boolean;
 	public constructor() {
 		this.music = new egret.Sound();
-		this.music.load("/resource/assets/bg.mp3");
+		this.music.load("resource/assets/bg.mp3");
 		this.music.addEventListener(egret.Event.COMPLETE, () => {
 			this.canPlay = true;
 		}, this)
