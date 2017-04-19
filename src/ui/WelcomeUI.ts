@@ -68,7 +68,7 @@ class WelcomeUI extends egret.Sprite {
 		})
 		cardBtn.touchEnabled = true;
 		cardBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			window.location.href = StaticData.url + "/Coupon/MyCoupon?mch=guzhiwei";
+			//window.location.href = StaticData.url + "/Coupon/MyCoupon?mch=guzhiwei";
 		}, this)
 	}
 

@@ -67,6 +67,7 @@ class GameOverUI extends egret.Sprite {
 			txt.y -= 65;
 			txt.x -= 25;
 			txt.size = 50;
+			txt.textColor = 0xffb400;
 		});
 	}
 

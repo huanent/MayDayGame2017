@@ -34,14 +34,15 @@ class EnemyUI extends egret.Sprite {
 		else if (x == 0 && y < 0) {
 			r = 270;
 		}
-		else if (x > 0 && y > 0) {
-			r += 90;
-		}
+
 		else if (x > 0 && y == 0) {
 			r = 90;
 		}
 		else if (x < 0 && y == 0) {
 			r = 270;
+		}
+		else if (x > 0 && y > 0) {
+			r += 90;
 		}
 		else if (x < 0 && y < 0) {
 			r += 270;
