@@ -126,7 +126,8 @@ class Main extends egret.DisplayObjectContainer {
         this.gameOverUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(this.gameUI);
             super.removeChild(this.gameOverUI);
-            this.addWelcomeUI();
+           // this.addWelcomeUI();
+           this.addGameUI();
         }, this)
     }
 }

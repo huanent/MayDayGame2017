@@ -12,6 +12,7 @@ class WelcomeUI extends egret.Sprite {
 
 	private createView(): void {
 		this.addBg();
+		this.addRank();
 		this.addBeginBtn();
 		this.addCardBtn();
 		this.addHelpBtn();
@@ -70,6 +71,24 @@ class WelcomeUI extends egret.Sprite {
 		cardBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			//window.location.href = StaticData.url + "/Coupon/MyCoupon?mch=guzhiwei";
 		}, this)
+	}
+
+	private addRank(): void {
+		let num: number = 112;
+		let txt1 = RESHelpers.createTxt("已有" + num + "人参加西游")
+		RESHelpers.addToParent(this, txt1, Align.bottomRight, AlignContainer.stage, () => {
+			txt1.textColor = 0x0;
+			txt1.y -= 30;
+			txt1.x -= 350;
+		})
+		let lookRankTxt = RESHelpers.createTxt("查看排行")
+		RESHelpers.addToParent(this, lookRankTxt, Align.bottomRight, AlignContainer.stage, () => {
+			lookRankTxt.textColor = 0xffb400;
+			lookRankTxt.size = 40;
+			lookRankTxt.x -= 220;
+			lookRankTxt.y -= 40;
+		})
+		lookRankTxt.touchEnabled=true;
 	}
 
 	enableBeginGameTap(): void {
