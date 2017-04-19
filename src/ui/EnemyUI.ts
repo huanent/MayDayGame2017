@@ -22,37 +22,40 @@ class EnemyUI extends egret.Sprite {
 	}
 	slip(x: number, y: number): void {
 		this.timer.stop();
-		this.enemy.visible = false;
-		this.enemy2.visible = false;
-		let enemy3 = RESHelpers.createImg("enemy_png");
-		// var r = y * y * 90 / (y * y + x * x);
-		// if (x == 0 && y > 0) {
-		// 	r = 180;
-		// }
-		// else if (x == 0 && y < 0) {
-		// 	r = 0;
-		// }
-		// else if (x > 0 && y > 0) {
-		// 	r += 90;
-		// }
-		// else if (x > 0 && y == 0) {
-		// 	r = 90;
-		// }
-		// else if (x < 0 && y == 0) {
-		// 	r = 270;
-		// }
-		// else if (x < 0 && y < 0) {
-		// 	r += 270;
-		// } else if (x < 0 && y > 0) {
-		// 	r += 180;
-		// } else if (x > 0 && y > 0) {
-		// 	r += 90;
-		// }
-		// enemy3.anchorOffsetX += enemy3.width / 2;
-		// enemy3.anchorOffsetY += enemy3.height / 2;
-		// enemy3.x += enemy3.width / 2;
-		// enemy3.y += enemy3.height / 2;
-		// enemy3.rotation = r;
+		// this.enemy.visible = false;
+		// this.enemy2.visible = false;
+		this.removeChild(this.enemy);
+		this.removeChild(this.enemy2);
+		let enemy3 = RESHelpers.createImg("nv3_png");
+		var r = y * y * 90 / (y * y + x * x);
+		if (x == 0 && y > 0) {
+			r = 90;
+		}
+		else if (x == 0 && y < 0) {
+			r = 270;
+		}
+
+		else if (x > 0 && y == 0) {
+			r = 90;
+		}
+		else if (x < 0 && y == 0) {
+			r = 270;
+		}
+		else if (x > 0 && y > 0) {
+			r += 90;
+		}
+		else if (x < 0 && y < 0) {
+			r += 270;
+		} else if (x < 0 && y > 0) {
+			r += 180;
+		} else if (x > 0 && y > 0) {
+			r += 90;
+		}
+		enemy3.anchorOffsetX += enemy3.width / 2;
+		enemy3.anchorOffsetY += enemy3.height / 2;
+		enemy3.x += enemy3.width / 2;
+		enemy3.y += enemy3.height / 2;
+		enemy3.rotation = r;
 		RESHelpers.addToParent(this, enemy3);
 	}
 }
