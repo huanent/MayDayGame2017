@@ -5,11 +5,27 @@ class GameOverUI extends egret.Sprite {
 	}
 
 	private createView(): void {
+		this.uploadRecord();
 		this.addBg();
 		this.addWindow();
 		this.addRestartBtn();
 		this.addCardBtn();
 		this.addMark();
+	}
+
+	private uploadRecord(): void {
+		var request = new egret.HttpRequest();
+		request.responseType = egret.HttpResponseType.TEXT;
+		//request.open(StaticData.rankUrl + "/rank/add", egret.HttpMethod.POST);
+		request.open("/rank/add", egret.HttpMethod.POST);
+		//设置响应头
+		request.setRequestHeader("Content-Type", "application/json");
+		//发送参数
+		let rank = new Rank();
+		rank.HeadImgPath = StaticData.headImgPath;
+		rank.Name = StaticData.nickName;
+		rank.Record = this.time;
+		request.send(JSON.stringify(rank));
 	}
 
 	private addBg(): void {
@@ -55,14 +71,12 @@ class GameOverUI extends egret.Sprite {
 		});
 		cardBtn.touchEnabled = true;
 		cardBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-
+			window.location.href = StaticData.url + "/Coupon/MyCoupon?mch=guzhiwei";
 		}, this);
 	}
 
 	private addMark(): void {
-		let m = this.time / 60;
-		let s = this.time % 60;
-		let txt = RESHelpers.createTxt(Math.floor(m) + " : " + Math.floor(s));
+		let txt = RESHelpers.createTxt(this.time.toFixed(2) + "秒");
 		RESHelpers.addToParent(this, txt, Align.center, null, () => {
 			txt.y -= 65;
 			txt.x -= 25;

@@ -105,9 +105,9 @@ class GameUI extends egret.Sprite {
 	private addBar(): void {
 		let barUI = this.barUI = new BarUI(this.music);
 		RESHelpers.addToParent(this, barUI);
-		let timer = new egret.Timer(100, 0);
+		let timer = new egret.Timer(70, 0);
 		timer.addEventListener(egret.TimerEvent.TIMER, () => {
-			this.passTime += 0.1;
+			this.passTime += 0.07;
 			barUI.setTime(this.passTime);
 		}, this)
 		this.timers.push(timer);

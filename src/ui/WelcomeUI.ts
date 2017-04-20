@@ -1,7 +1,9 @@
 class WelcomeUI extends egret.Sprite {
 	beginBtn: egret.Bitmap;
 	cardBtn: egret.Bitmap;
+	rankUI: RankUI;
 	helpBtnTimer: egret.Timer;
+	isSub: boolean = StaticData.IsSub;
 	/**
 	 *欢迎界面
 	 */
@@ -16,6 +18,24 @@ class WelcomeUI extends egret.Sprite {
 		this.addBeginBtn();
 		this.addCardBtn();
 		this.addHelpBtn();
+		if (!this.isSub) {
+			let bg = new egret.Shape();
+			bg.graphics.beginFill(0, 0.8);
+			bg.graphics.drawRect(-1, -1, AlignHelpers.stageWidth + 1, AlignHelpers.stageHeight + 1);
+			bg.graphics.endFill();
+			bg.touchEnabled = true;
+			super.addChild(bg);
+			let qr = document.getElementById("qr");
+			qr.style.visibility = "visible";
+			let subText = new egret.TextField();
+			subText.text = "长按识别二维码，关注公众号";
+			RESHelpers.addToParent(this, subText, Align.center, AlignContainer.stage)
+			subText.y += 230;
+			let subText2 = new egret.TextField();
+			subText2.text = "点击“开始游戏”，开始“唐僧五一游记”游戏。";
+			RESHelpers.addToParent(this, subText2, Align.center, AlignContainer.stage);
+			subText2.y += 270;
+		}
 	}
 
 	private addBg(): void {
@@ -69,7 +89,7 @@ class WelcomeUI extends egret.Sprite {
 		})
 		cardBtn.touchEnabled = true;
 		cardBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			//window.location.href = StaticData.url + "/Coupon/MyCoupon?mch=guzhiwei";
+			window.location.href = StaticData.url + "/Coupon/MyCoupon?mch=guzhiwei";
 		}, this)
 	}
 
@@ -88,7 +108,14 @@ class WelcomeUI extends egret.Sprite {
 			lookRankTxt.x -= 220;
 			lookRankTxt.y -= 40;
 		})
-		lookRankTxt.touchEnabled=true;
+		lookRankTxt.touchEnabled = true;
+		lookRankTxt.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			this.rankUI = new RankUI();
+			RESHelpers.addToParent(this, this.rankUI);
+			this.rankUI.addEventListener(WindowCloseEvent.NAME, () => {
+				super.removeChild(this.rankUI);
+			}, this);
+		}, this);
 	}
 
 	enableBeginGameTap(): void {

@@ -5,8 +5,14 @@ class HelpUI extends egret.Sprite {
 		RESHelpers.addToParent(this, bg);
 		let img = RESHelpers.createImg("rules_bg@2x_png");
 		RESHelpers.addToParent(this, img, Align.center, AlignContainer.stage);
-		bg.touchEnabled = true;
-		bg.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+		let close = RESHelpers.createImg("close@2x_png");
+		RESHelpers.addToParent(this, close, Align.center, AlignContainer.stage), () => {
+
+		};
+		close.y -= 450;
+		close.x += 300;
+		close.touchEnabled = true;
+		close.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME));
 		}, this)
 	}

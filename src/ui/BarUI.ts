@@ -54,6 +54,6 @@ class BarUI extends egret.Sprite {
 	}
 	setTime(timeStr: number) {
 		let timeTxt = this.timeTxt;
-		timeTxt.text = timeStr.toFixed(1);
+		timeTxt.text = timeStr.toFixed(2);
 	}
 }

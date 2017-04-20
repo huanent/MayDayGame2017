@@ -14,6 +14,7 @@ class Main extends egret.DisplayObjectContainer {
 
     public constructor() {
         super();
+       // WeChatApiHelper.getOpenId();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
@@ -126,8 +127,8 @@ class Main extends egret.DisplayObjectContainer {
         this.gameOverUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(this.gameUI);
             super.removeChild(this.gameOverUI);
-           // this.addWelcomeUI();
-           this.addGameUI();
+            // this.addWelcomeUI();
+            this.addGameUI();
         }, this)
     }
 }
