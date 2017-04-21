@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,bg_png,card_btn_png,begin_btn_png,home-jinnang@2x_png,rules_bg@2x_png,game_bg_png,monk_png,monk2_png,enemy_png,enemy2_png,bg_mp3,music-_close-@2x_png,music-@2x_png,yun-small_png,nv3_png,close@2x_png,paihangbang-bg@2x_png",
+			"keys": "description_json,bg_png,card_btn_png,begin_btn_png,home-jinnang@2x_png,rules_bg@2x_png,game_bg_png,monk_png,monk2_png,enemy_png,enemy2_png,bg_mp3,music-_close-@2x_png,music-@2x_png,yun-small_png,close@2x_png,paihangbang-bg@2x_png,btn-i-know@2x_png,btn_lingqujiangli@2x_png,losed@2x_png,btn_paihang@2x_png",
 			"name": "preload"
 		},
 		{
@@ -91,11 +91,6 @@
 			"name": "rules_bg@2x_png"
 		},
 		{
-			"url": "assets/nv3.png",
-			"type": "image",
-			"name": "nv3_png"
-		},
-		{
 			"url": "assets/window1.png",
 			"type": "image",
 			"name": "window1_png"
@@ -116,14 +111,34 @@
 			"name": "btn_jiangli@2x_png"
 		},
 		{
-			"name": "close@2x_png",
+			"url": "assets/close@2x.png",
 			"type": "image",
-			"url": "assets/close@2x.png"
+			"name": "close@2x_png"
 		},
 		{
-			"name": "paihangbang-bg@2x_png",
+			"url": "assets/paihangbang-bg@2x.png",
 			"type": "image",
-			"url": "assets/paihangbang-bg@2x.png"
+			"name": "paihangbang-bg@2x_png"
+		},
+		{
+			"url": "assets/btn-i-know@2x.png",
+			"type": "image",
+			"name": "btn-i-know@2x_png"
+		},
+		{
+			"url": "assets/btn_lingqujiangli@2x.png",
+			"type": "image",
+			"name": "btn_lingqujiangli@2x_png"
+		},
+		{
+			"url": "assets/losed@2x.png",
+			"type": "image",
+			"name": "losed@2x_png"
+		},
+		{
+			"name": "btn_paihang@2x_png",
+			"type": "image",
+			"url": "assets/btn_paihang@2x.png"
 		}
 	]
 }

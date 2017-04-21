@@ -25,6 +25,7 @@ var game_file_list = [
 	"bin-debug/model/RankViewModel.js",
 	"bin-debug/ui/BarUI.js",
 	"bin-debug/ui/EnemyUI.js",
+	"bin-debug/ui/GamehelpUI.js",
 	"bin-debug/ui/GameOverUI.js",
 	"bin-debug/ui/GameUI.js",
 	"bin-debug/ui/HelpUI.js",

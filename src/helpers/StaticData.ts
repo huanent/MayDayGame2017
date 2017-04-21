@@ -6,5 +6,6 @@ class StaticData {
 	static openId: string;
 	static IsSub: boolean;
 	static headImgPath: string;
-	static nickName: string
+	static nickName: string;
+	static showTip: boolean;
 }

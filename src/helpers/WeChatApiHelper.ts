@@ -1,6 +1,6 @@
 class WeChatApiHelper {
 
-	static getOpenId(): void {
+	static getOpenId(call:Function): void {
 		let openid = this.getQueryString("openid");
 		let subscribe: string = this.getQueryString("subscribe");
 		let name: string = decodeURI(this.getQueryString("nickname"));
@@ -15,11 +15,11 @@ class WeChatApiHelper {
 			StaticData.IsSub = false;
 			return;
 		}
-		//alert(openid);
 		StaticData.openId = openid;
 		StaticData.IsSub = true;
 		StaticData.headImgPath = headImgPath;
-		StaticData.nickName=name;
+		StaticData.nickName = name;
+		call();
 	}
 
 	static getQueryString(name): string {
@@ -27,4 +27,5 @@ class WeChatApiHelper {
 		var r = window.location.search.substr(1).match(reg);
 		if (r != null) return decodeURI(r[2]); return null;
 	}
+
 }

@@ -15,11 +15,25 @@ class GameUI extends egret.Sprite {
 	}
 	private createView(): void {
 		this.addBg();
-		this.addMonk();
-		this.addCloud();
-		this.addBar();
-		this.addEnemyTimer();
-		this.addEnemyAction();
+		let next: Function = () => {
+			this.addMonk();
+			this.addCloud();
+			this.addBar();
+			this.addEnemyTimer();
+			this.addEnemyAction();
+		}
+		Helpers.checkHavePlay((b) => {
+			if (b=="false") {
+				let helpView = new GamehelpUI();
+				helpView.addEventListener(WindowCloseEvent.NAME, () => {
+					this.removeChild(helpView);
+					next();
+				}, this);
+				RESHelpers.addToParent(this, helpView);
+			} else {
+				next();
+			}
+		});
 	}
 
 	private addBg(): void {
@@ -46,8 +60,8 @@ class GameUI extends egret.Sprite {
 	private addMonk(): void {
 		let monk = this.monk = new MonkUI();
 		let bg = this.bg;
-		RESHelpers.addToParent(this, monk, Align.bottomCenter, null, () => {
-			monk.y -= 100;
+		RESHelpers.addToParent(this, monk, Align.center, null, () => {
+			//monk.y -= 100;
 		})
 		bg.touchEnabled = true;
 		let moveMonk: Function = (e: egret.TouchEvent) => {
@@ -139,7 +153,7 @@ class GameUI extends egret.Sprite {
 				let x = this.monk.x - element.x;
 				let y = this.monk.y - element.y;
 				let s = Math.sqrt(x * x + y * y);
-				if (s < 350) {
+				if (s < 280) {
 					let toX = toLength / (1 + Math.abs(y / x));
 					if (this.monk.x < element.x) toX = -toX;
 					let toY = toLength / (1 + Math.abs(x / y));
@@ -149,7 +163,7 @@ class GameUI extends egret.Sprite {
 						.call(() => {
 							element.slip(x, y);
 						})
-						.to({ x: element.x + toX, y: element.y + toY }, 2500)
+						.to({ x: element.x + toX, y: element.y + toY }, 2200)
 						.call(() => {
 							super.removeChild(element);
 						})
@@ -203,7 +217,7 @@ class GameUI extends egret.Sprite {
 				let event = new GameOverEvent(GameOverEvent.NAME);
 				event.time = this.passTime;
 				this.dispatchEvent(event);
-				this.monk.visible=false;
+				this.monk.visible = false;
 			}
 		}, this)
 		this.timers.push(timer)

@@ -14,20 +14,21 @@ class Main extends egret.DisplayObjectContainer {
 
     public constructor() {
         super();
-       // WeChatApiHelper.getOpenId();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
     private onAddToStage(event: egret.Event) {
-        //设置加载进度界面
-        //Config to load process interface
-        this.loadingView = new LoadingUI();
-        this.stage.addChild(this.loadingView);
+        WeChatApiHelper.getOpenId(() => {
+            //设置加载进度界面
+            //Config to load process interface
+            this.loadingView = new LoadingUI();
+            this.stage.addChild(this.loadingView);
 
-        //初始化Resource资源加载库
-        //initiate Resource loading library
-        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.loadConfig("resource/default.res.json", "resource/");
+            //初始化Resource资源加载库
+            //initiate Resource loading library
+            RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+            RES.loadConfig("resource/default.res.json", "resource/");
+        });
     }
 
     /**
@@ -127,8 +128,8 @@ class Main extends egret.DisplayObjectContainer {
         this.gameOverUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(this.gameUI);
             super.removeChild(this.gameOverUI);
-            // this.addWelcomeUI();
-            this.addGameUI();
+            this.addWelcomeUI();
+            //this.addGameUI();
         }, this)
     }
 }

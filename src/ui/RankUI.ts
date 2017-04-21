@@ -17,26 +17,24 @@ class RankUI extends egret.Sprite {
 		close.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME));
 		}, this)
-		this.getRankListView();
-	}
-	private getRankListView() {
+
+		var request = new egret.HttpRequest();
+		request.responseType = egret.HttpResponseType.TEXT;
+		request.open("/Rank/GetRank/" + StaticData.openId, egret.HttpMethod.GET);
+		request.send();
+		request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
+			let b: string = request.response;
+			if (b != "-2") {
+				let rankTxt = RESHelpers.createTxt("您的当前排名:" + b + "位(只显示前100名)", 0xffe400);
+				RESHelpers.addToParent(this, rankTxt, Align.center, AlignContainer.stage);
+				rankTxt.y -= 350;
+			}
+		}, this);
+
 		let rankListView = new RankListView();
 		RESHelpers.addToParent(this, rankListView);
 		rankListView.y = AlignHelpers.stageHeight / 2 - 210;
 		rankListView.x += 90;
 		rankListView.mask = new egret.Rectangle(0, -20, 530, 660);
-
-		// let touchpad = RESHelpers.createShape(90, AlignHelpers.stageHeight / 2 - 210, 530, 660, 0, 0.5);
-		// touchpad.touchEnabled = true;
-		// this.addChild(touchpad);
-		// touchpad.addEventListener(egret.TouchEvent.TOUCH_MOVE, (e: egret.TouchEvent) => {
-		// 	if (!this.tempY) this.tempY = e.stageY;
-		// 	if (e.stageY > this.tempY) {
-		// 		rankListView.y += 5;
-		// 	} else if (e.stageY < this.tempY) {
-		// 		rankListView.y -= 5;
-		// 	}
-		// 	this.tempY = e.stageY;
-		// }, this)
 	}
 }

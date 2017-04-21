@@ -1,7 +1,7 @@
 class RankListView extends egret.Sprite {
 	hei: number = 100;
-	tempY: Number;
-
+	tempY: number;
+	offset: number;
 	public constructor() {
 		super();
 		this.createView();
@@ -12,17 +12,13 @@ class RankListView extends egret.Sprite {
 		let touchpad = RESHelpers.createShape(0, 0, 530, 660, 0, 0);
 		touchpad.touchEnabled = true;
 		this.addChild(touchpad);
+		touchpad.addEventListener(egret.TouchEvent.TOUCH_BEGIN, (e: egret.TouchEvent) => {
+			this.offset = e.stageY - rankView.y;
+		}, this)
 		touchpad.addEventListener(egret.TouchEvent.TOUCH_MOVE, (e: egret.TouchEvent) => {
-			if (!this.tempY) this.tempY = e.stageY;
-			if (e.stageY > this.tempY && rankView.y < 0) {
-				rankView.y += 10;
-			} 
-			else if (e.stageY < this.tempY && rankView.y > -rankView.count * 61) {
-				rankView.y -= 10;
-			}
-
-
-			this.tempY = e.stageY;
+			rankView.y = e.stageY - this.offset;
+			if (rankView.y > 0) rankView.y = 0;
+			if (rankView.y < -rankView.count * 61) rankView.y = -(rankView.count - 1) * 101;
 		}, this)
 	}
 

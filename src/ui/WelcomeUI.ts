@@ -1,6 +1,7 @@
 class WelcomeUI extends egret.Sprite {
 	beginBtn: egret.Bitmap;
 	cardBtn: egret.Bitmap;
+	rankBtn:egret.Bitmap;
 	rankUI: RankUI;
 	helpBtnTimer: egret.Timer;
 	isSub: boolean = StaticData.IsSub;
@@ -48,7 +49,7 @@ class WelcomeUI extends egret.Sprite {
 		RESHelpers.addToParent(this, beginBtn, Align.centerX, null, () => {
 			beginBtn.y = AlignHelpers.stageHeight + beginBtn.height;
 			egret.Tween.get(beginBtn)
-				.to({ y: beginBtn.y - 420 }, 1000, egret.Ease.circOut)
+				.to({ y: beginBtn.y - 510 }, 1000, egret.Ease.circOut)
 		})
 	}
 
@@ -85,7 +86,7 @@ class WelcomeUI extends egret.Sprite {
 		RESHelpers.addToParent(this, cardBtn, Align.centerX, null, () => {
 			cardBtn.y = AlignHelpers.stageHeight + cardBtn.height;
 			egret.Tween.get(cardBtn)
-				.to({ y: cardBtn.y - 300 }, 1000, egret.Ease.circOut);
+				.to({ y: cardBtn.y - 390 }, 1000, egret.Ease.circOut);
 		})
 		cardBtn.touchEnabled = true;
 		cardBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
@@ -94,34 +95,30 @@ class WelcomeUI extends egret.Sprite {
 	}
 
 	private addRank(): void {
-		let num: number = 112;
-		let txt1 = RESHelpers.createTxt("已有" + num + "人参加西游")
-		RESHelpers.addToParent(this, txt1, Align.bottomRight, AlignContainer.stage, () => {
-			txt1.textColor = 0x0;
-			txt1.y -= 30;
-			txt1.x -= 350;
+		let btn =this.rankBtn= this.cardBtn = RESHelpers.createImg("btn_paihang@2x_png");
+		RESHelpers.addToParent(this, btn, Align.centerX, null, () => {
+			btn.y = AlignHelpers.stageHeight + btn.height;
+			egret.Tween.get(btn)
+				.to({ y: btn.y - 270 }, 500, egret.Ease.circOut);
 		})
-		let lookRankTxt = RESHelpers.createTxt("查看排行")
-		RESHelpers.addToParent(this, lookRankTxt, Align.bottomRight, AlignContainer.stage, () => {
-			lookRankTxt.textColor = 0xffb400;
-			lookRankTxt.size = 40;
-			lookRankTxt.x -= 220;
-			lookRankTxt.y -= 40;
-		})
-		lookRankTxt.touchEnabled = true;
-		lookRankTxt.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+		btn.touchEnabled = true;
+		btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.rankUI = new RankUI();
 			RESHelpers.addToParent(this, this.rankUI);
 			this.rankUI.addEventListener(WindowCloseEvent.NAME, () => {
 				super.removeChild(this.rankUI);
 			}, this);
-		}, this);
+		}, this)
+
+
 	}
 
 	enableBeginGameTap(): void {
 		let beginBtn = this.beginBtn;
 		beginBtn.touchEnabled = true;
 		beginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			egret.Tween.get(this.rankBtn)
+				.to({ y: this.rankBtn.y + 180 }, 500, egret.Ease.circIn)
 			egret.Tween.get(this.beginBtn)
 				.to({ y: this.beginBtn.y + 420 }, 500, egret.Ease.circIn)
 			egret.Tween.get(this.cardBtn)
