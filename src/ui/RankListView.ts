@@ -18,7 +18,7 @@ class RankListView extends egret.Sprite {
 		touchpad.addEventListener(egret.TouchEvent.TOUCH_MOVE, (e: egret.TouchEvent) => {
 			rankView.y = e.stageY - this.offset;
 			if (rankView.y > 0) rankView.y = 0;
-			if (rankView.y < -rankView.count * 101+500) rankView.y = -rankView.count * 101+500;
+			if (rankView.y < -rankView.count * 101) rankView.y = -rankView.count * 101;
 		}, this)
 	}
 
