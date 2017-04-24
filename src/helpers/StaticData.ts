@@ -8,4 +8,5 @@ class StaticData {
 	static headImgPath: string;
 	static nickName: string;
 	static showTip: boolean;
+	static isPlayMusic:boolean=true;
 }

@@ -31,11 +31,13 @@ class BarUI extends egret.Sprite {
 			this.music.play();
 			closeMusicBtn.visible = false;
 			openMusicBtn.visible = true;
+			StaticData.isPlayMusic=true;
 		}, this)
 		openMusicBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.music.stop();
 			openMusicBtn.visible = false;
 			closeMusicBtn.visible = true;
+			StaticData.isPlayMusic=false;
 		}, this)
 		if (this.music.isFirst) {
 			this.music.isFirst = false;

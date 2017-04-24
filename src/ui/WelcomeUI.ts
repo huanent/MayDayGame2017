@@ -127,7 +127,7 @@ class WelcomeUI extends egret.Sprite {
 					this.helpBtnTimer.stop();
 					this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME))
 				})
-			if (this.music.isFirst) this.music.play();
+			if (this.music.isFirst||StaticData.isPlayMusic) this.music.play();
 		}, this)
 	}
 }
