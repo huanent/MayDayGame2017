@@ -9,4 +9,6 @@ class StaticData {
 	static nickName: string;
 	static showTip: boolean;
 	static isPlayMusic:boolean=true;
+
+	static bgMusic:SoundPlayer;
 }

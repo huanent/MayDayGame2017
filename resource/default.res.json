@@ -1,12 +1,8 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,bg_png,card_btn_png,begin_btn_png,home-jinnang@2x_png,rules_bg@2x_png,game_bg_png,monk_png,monk2_png,enemy_png,enemy2_png,bg_mp3,music-_close-@2x_png,music-@2x_png,yun-small_png,close@2x_png,paihangbang-bg@2x_png,btn-i-know@2x_png,btn_lingqujiangli@2x_png,losed@2x_png,btn_paihang@2x_png,MonkDie_mp3",
+			"keys": "description_json,bg_png,card_btn_png,begin_btn_png,home-jinnang@2x_png,rules_bg@2x_png,game_bg_png,monk_png,monk2_png,enemy_png,enemy2_png,bg_mp3,music-_close-@2x_png,music-@2x_png,yun-small_png,close@2x_png,paihangbang-bg@2x_png,btn-i-know@2x_png,btn_lingqujiangli@2x_png,losed@2x_png,btn_paihang@2x_png,MonkDie_mp3,restart_btn_png,window1_png,window2_png,window3_png,btn_jiangli@2x_png",
 			"name": "preload"
-		},
-		{
-			"keys": "restart_btn_png,window1_png,window2_png,window3_png,btn_jiangli@2x_png",
-			"name": "game"
 		}
 	],
 	"resources": [
@@ -136,14 +132,14 @@
 			"name": "losed@2x_png"
 		},
 		{
-			"name": "btn_paihang@2x_png",
+			"url": "assets/btn_paihang@2x.png",
 			"type": "image",
-			"url": "assets/btn_paihang@2x.png"
+			"name": "btn_paihang@2x_png"
 		},
 		{
-			"name": "MonkDie_mp3",
+			"url": "assets/MonkDie.mp3",
 			"type": "sound",
-			"url": "assets/MonkDie.mp3"
+			"name": "MonkDie_mp3"
 		}
 	]
 }

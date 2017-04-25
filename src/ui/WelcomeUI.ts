@@ -7,7 +7,7 @@ class WelcomeUI extends egret.Sprite {
 	/**
 	 *欢迎界面
 	 */
-	constructor(public music: MusicPlayer) {
+	constructor() {
 		super();
 		this.createView();
 	}
@@ -19,22 +19,14 @@ class WelcomeUI extends egret.Sprite {
 		this.addCardBtn();
 		this.addHelpBtn();
 		if (!StaticData.IsSub) {
-			let bg = new egret.Shape();
-			bg.graphics.beginFill(0, 0.8);
-			bg.graphics.drawRect(-1, -1, AlignHelpers.stageWidth + 1, AlignHelpers.stageHeight + 1);
-			bg.graphics.endFill();
-			bg.touchEnabled = true;
-			super.addChild(bg);
+			// let bg = new egret.Shape();
+			// bg.graphics.beginFill(0, 0.8);
+			// bg.graphics.drawRect(-1, -1, AlignHelpers.stageWidth + 1, AlignHelpers.stageHeight + 1);
+			// bg.graphics.endFill();
+			// bg.touchEnabled = true;
+			// super.addChild(bg);
 			let qr = document.getElementById("qr");
 			qr.style.visibility = "visible";
-			let subText = new egret.TextField();
-			subText.text = "长按识别二维码，关注公众号";
-			RESHelpers.addToParent(this, subText, Align.center, AlignContainer.stage)
-			subText.y += 230;
-			let subText2 = new egret.TextField();
-			subText2.text = "点击“开始游戏”，开始“唐僧五一游记”游戏。";
-			RESHelpers.addToParent(this, subText2, Align.center, AlignContainer.stage);
-			subText2.y += 270;
 		}
 	}
 
@@ -49,7 +41,20 @@ class WelcomeUI extends egret.Sprite {
 			beginBtn.y = AlignHelpers.stageHeight + beginBtn.height;
 			egret.Tween.get(beginBtn)
 				.to({ y: beginBtn.y - 510 }, 1000, egret.Ease.circOut)
-		})
+		});
+		beginBtn.touchEnabled = true;
+		beginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			egret.Tween.get(this.rankBtn)
+				.to({ y: this.rankBtn.y + 180 }, 500, egret.Ease.circIn)
+			egret.Tween.get(this.beginBtn)
+				.to({ y: this.beginBtn.y + 420 }, 500, egret.Ease.circIn)
+			egret.Tween.get(this.cardBtn)
+				.to({ y: this.cardBtn.y + 300 }, 1000, egret.Ease.cubicOut)
+				.call(() => {
+					this.helpBtnTimer.stop();
+					this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME))
+				})
+		}, this)
 	}
 
 	private addHelpBtn(): void {
@@ -107,26 +112,6 @@ class WelcomeUI extends egret.Sprite {
 			this.rankUI.addEventListener(WindowCloseEvent.NAME, () => {
 				super.removeChild(this.rankUI);
 			}, this);
-		}, this)
-
-
-	}
-
-	enableBeginGameTap(): void {
-		let beginBtn = this.beginBtn;
-		beginBtn.touchEnabled = true;
-		beginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			egret.Tween.get(this.rankBtn)
-				.to({ y: this.rankBtn.y + 180 }, 500, egret.Ease.circIn)
-			egret.Tween.get(this.beginBtn)
-				.to({ y: this.beginBtn.y + 420 }, 500, egret.Ease.circIn)
-			egret.Tween.get(this.cardBtn)
-				.to({ y: this.cardBtn.y + 300 }, 1000, egret.Ease.cubicOut)
-				.call(() => {
-					this.helpBtnTimer.stop();
-					this.dispatchEvent(new WindowCloseEvent(WindowCloseEvent.NAME))
-				})
-			if (this.music.isFirst||StaticData.isPlayMusic) this.music.play();
 		}, this)
 	}
 }

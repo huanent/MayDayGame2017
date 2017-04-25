@@ -9,7 +9,6 @@ class Main extends egret.DisplayObjectContainer {
     private welcomeUI: WelcomeUI;
     private gameUI: GameUI;
     private gameOverUI: GameOverUI;
-    private isFirst: boolean = true;
     private music: MusicPlayer;
 
     public constructor() {
@@ -18,17 +17,16 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private onAddToStage(event: egret.Event) {
-        WeChatApiHelper.getOpenId(() => {
-            //设置加载进度界面
-            //Config to load process interface
-            this.loadingView = new LoadingUI();
-            this.stage.addChild(this.loadingView);
-
-            //初始化Resource资源加载库
-            //initiate Resource loading library
-            RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-            RES.loadConfig("resource/default.res.json", "resource/");
-        });
+        // WeChatApiHelper.getOpenId(() => {
+        //     this.loadingView = new LoadingUI();
+        //     this.stage.addChild(this.loadingView);
+        //     RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+        //     RES.loadConfig("resource/default.res.json", "resource/");
+        // });
+        this.loadingView = new LoadingUI();
+        this.stage.addChild(this.loadingView);
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+        RES.loadConfig("resource/default.res.json", "resource/");
     }
 
     /**
@@ -56,7 +54,6 @@ class Main extends egret.DisplayObjectContainer {
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
             RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
             this.createGameScene();
-            this.welcomeUI.enableBeginGameTap();
         }
     }
 
@@ -97,21 +94,17 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {
         AlignHelpers.stageWidth = this.stage.stageWidth;
         AlignHelpers.stageHeight = this.stage.stageHeight;
+        StaticData.bgMusic = new SoundPlayer("resource/assets/bg.mp3", () => {
+            this.addWelcomeUI();
+        });
         if (!this.music) this.music = new MusicPlayer();
-        this.addWelcomeUI();
     }
 
     private addWelcomeUI(): void {
-        let welcomeUI = this.welcomeUI = new WelcomeUI(this.music);
-        this.addChild(welcomeUI);
-        if (this.isFirst) {
-            RES.loadGroup("game");
-            this.isFirst = false;
-        } else {
-            this.welcomeUI.enableBeginGameTap();
-        }
-        welcomeUI.addEventListener(WindowCloseEvent.NAME, () => {
-            super.removeChild(welcomeUI);
+        this.welcomeUI = new WelcomeUI();
+        this.addChild(this.welcomeUI);
+        this.welcomeUI.addEventListener(WindowCloseEvent.NAME, () => {
+            super.removeChild(this.welcomeUI);
             this.addGameUI();
         }, this)
     }
