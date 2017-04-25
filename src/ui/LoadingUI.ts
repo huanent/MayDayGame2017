@@ -3,8 +3,6 @@ class LoadingUI extends egret.Sprite {
 
     public constructor() {
         super();
-        
-        StaticData.IsSub = true;
         this.createView();
     }
 

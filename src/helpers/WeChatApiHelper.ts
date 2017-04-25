@@ -1,6 +1,6 @@
 class WeChatApiHelper {
 
-	static getOpenId(call:Function): void {
+	static getOpenId(call: Function): void {
 		let openid = this.getQueryString("openid");
 		let subscribe: string = this.getQueryString("subscribe");
 		let name: string = decodeURI(this.getQueryString("nickname"));
@@ -13,10 +13,10 @@ class WeChatApiHelper {
 		}
 		if (subscribe == "0") {
 			StaticData.IsSub = false;
-			return;
+		} else {
+			StaticData.IsSub = true;
 		}
 		StaticData.openId = openid;
-		StaticData.IsSub = true;
 		StaticData.headImgPath = headImgPath;
 		StaticData.nickName = name;
 		call();

@@ -4,7 +4,6 @@ class WelcomeUI extends egret.Sprite {
 	rankBtn:egret.Bitmap;
 	rankUI: RankUI;
 	helpBtnTimer: egret.Timer;
-	isSub: boolean = StaticData.IsSub;
 	/**
 	 *欢迎界面
 	 */
@@ -19,7 +18,7 @@ class WelcomeUI extends egret.Sprite {
 		this.addBeginBtn();
 		this.addCardBtn();
 		this.addHelpBtn();
-		if (!this.isSub) {
+		if (!StaticData.IsSub) {
 			let bg = new egret.Shape();
 			bg.graphics.beginFill(0, 0.8);
 			bg.graphics.drawRect(-1, -1, AlignHelpers.stageWidth + 1, AlignHelpers.stageHeight + 1);
