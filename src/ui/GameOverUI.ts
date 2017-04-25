@@ -19,7 +19,7 @@ class GameOverUI extends egret.Sprite {
 		var request = new egret.HttpRequest();
 		request.responseType = egret.HttpResponseType.TEXT;
 		//request.open(StaticData.rankUrl + "/rank/add", egret.HttpMethod.POST);
-		request.open("/rank/add", egret.HttpMethod.POST);
+		request.open(StaticData.rankUrl+"/rank/add", egret.HttpMethod.POST);
 		//设置响应头
 		request.setRequestHeader("Content-Type", "application/json");
 		//发送参数

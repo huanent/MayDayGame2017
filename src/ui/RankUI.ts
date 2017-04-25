@@ -20,7 +20,7 @@ class RankUI extends egret.Sprite {
 
 		var request = new egret.HttpRequest();
 		request.responseType = egret.HttpResponseType.TEXT;
-		request.open("/Rank/GetRank/" + StaticData.openId, egret.HttpMethod.GET);
+		request.open(StaticData.rankUrl+"/Rank/GetRank/" + StaticData.openId, egret.HttpMethod.GET);
 		request.send();
 		request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
 			let b: string = request.response;

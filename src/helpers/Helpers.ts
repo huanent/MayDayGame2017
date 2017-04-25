@@ -9,7 +9,7 @@ class Helpers {
 	static checkHavePlay(call: Function): void {
 		var request = new egret.HttpRequest();
 		request.responseType = egret.HttpResponseType.TEXT;
-		request.open("/Rank/HavePlay/" + StaticData.openId, egret.HttpMethod.GET);
+		request.open(StaticData.rankUrl+"/Rank/HavePlay/" + StaticData.openId, egret.HttpMethod.GET);
 		request.send();
 		request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
 			let b: boolean = request.response;

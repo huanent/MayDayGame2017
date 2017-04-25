@@ -8,7 +8,7 @@ class RankView extends egret.Sprite {
 	private createView(): void {
 		var request = new egret.HttpRequest();
 		request.responseType = egret.HttpResponseType.TEXT;
-		request.open("/Rank/GetTop100Rank", egret.HttpMethod.GET);
+		request.open(StaticData.rankUrl+"/Rank/GetTop100Rank", egret.HttpMethod.GET);
 		request.send();
 		request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
 			let data: Array<RankViewModel> = JSON.parse(request.response);
