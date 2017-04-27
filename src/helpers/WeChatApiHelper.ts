@@ -11,14 +11,12 @@ class WeChatApiHelper {
 			let url = "http://app.guzhiwei.com/wxis/Auth?companyCode=" + companyCode + "&UserInfo=true&scope=snsapi_userinfo&RedirectUrl=" + callUrl;
 			window.location.href = url;
 		}
-		if (subscribe == "0") {
-			StaticData.IsSub = false;
-		} else {
-			StaticData.IsSub = true;
-		}
-		StaticData.openId = openid;
-		StaticData.headImgPath = headImgPath;
-		StaticData.nickName = name;
+		StaticData.userInfo = new UserInfo(
+			subscribe == "1",
+			name,
+			headImgPath,
+			openid
+		);
 		call();
 	}
 

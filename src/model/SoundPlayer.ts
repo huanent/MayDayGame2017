@@ -1,6 +1,7 @@
 class SoundPlayer {
-	sound: egret.Sound;
-	ctrl:egret.SoundChannel;
+	private sound: egret.Sound;
+	private ctrl: egret.SoundChannel;
+	isPlay: boolean;
 
 	constructor(url: string, nextCall: Function) {
 		this.sound = new egret.Sound();
@@ -10,11 +11,13 @@ class SoundPlayer {
 		}, this)
 	}
 
-	play(){
-		this.ctrl=this.sound.play();
+	play() {
+		this.ctrl = this.sound.play();
+		this.isPlay = true;
 	}
-	
-	stop(){
+
+	stop() {
 		this.ctrl.stop();
+		this.isPlay = false;
 	}
 }

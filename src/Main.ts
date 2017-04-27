@@ -9,7 +9,6 @@ class Main extends egret.DisplayObjectContainer {
     private welcomeUI: WelcomeUI;
     private gameUI: GameUI;
     private gameOverUI: GameOverUI;
-    private music: MusicPlayer;
 
     public constructor() {
         super();
@@ -97,7 +96,6 @@ class Main extends egret.DisplayObjectContainer {
         StaticData.bgMusic = new SoundPlayer("resource/assets/bg.mp3", () => {
             this.addWelcomeUI();
         });
-        if (!this.music) this.music = new MusicPlayer();
     }
 
     private addWelcomeUI(): void {
@@ -105,12 +103,13 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(this.welcomeUI);
         this.welcomeUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(this.welcomeUI);
+            StaticData.bgMusic.play();
             this.addGameUI();
         }, this)
     }
 
     private addGameUI(): void {
-        this.gameUI = new GameUI(this.music);
+        this.gameUI = new GameUI();
         super.addChild(this.gameUI)
         this.gameUI.addEventListener(GameOverEvent.NAME, this.onGameOver, this)
     }
@@ -118,11 +117,9 @@ class Main extends egret.DisplayObjectContainer {
     private onGameOver(e: GameOverEvent): void {
         this.gameOverUI = new GameOverUI(e.time);
         super.addChild(this.gameOverUI);
-        if (StaticData.isPlayMusic) this.music.monkDiePlay();
         this.gameOverUI.addEventListener(WindowCloseEvent.NAME, () => {
             super.removeChild(this.gameUI);
             super.removeChild(this.gameOverUI);
-            if (StaticData.isPlayMusic) this.music.stop();
             this.addWelcomeUI();
             //this.addGameUI();
         }, this)

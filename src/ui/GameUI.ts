@@ -9,7 +9,7 @@ class GameUI extends egret.Sprite {
 	haveAddEnemyTask: boolean;
 	gameIsOver: boolean;
 	timers: Array<egret.Timer> = new Array<egret.Timer>();
-	public constructor(public music: MusicPlayer) {
+	public constructor() {
 		super();
 		this.createView();
 	}
@@ -22,18 +22,19 @@ class GameUI extends egret.Sprite {
 			this.addEnemyTimer();
 			this.addEnemyAction();
 		}
-		Helpers.checkHavePlay((b) => {
-			if (b=="false") {
-				let helpView = new GamehelpUI();
-				helpView.addEventListener(WindowCloseEvent.NAME, () => {
-					this.removeChild(helpView);
-					next();
-				}, this);
-				RESHelpers.addToParent(this, helpView);
-			} else {
-				next();
-			}
-		});
+		// Helpers.checkHavePlay((b) => {
+		// 	if (b=="false") {
+		// 		let helpView = new GamehelpUI();
+		// 		helpView.addEventListener(WindowCloseEvent.NAME, () => {
+		// 			this.removeChild(helpView);
+		// 			next();
+		// 		}, this);
+		// 		RESHelpers.addToParent(this, helpView);
+		// 	} else {
+		// 		next();
+		// 	}
+		// });
+		next();
 	}
 
 	private addBg(): void {
@@ -117,7 +118,7 @@ class GameUI extends egret.Sprite {
 	}
 
 	private addBar(): void {
-		let barUI = this.barUI = new BarUI(this.music);
+		let barUI = this.barUI = new BarUI();
 		RESHelpers.addToParent(this, barUI);
 		let timer = new egret.Timer(70, 0);
 		timer.addEventListener(egret.TimerEvent.TIMER, () => {
